@@ -1,0 +1,43 @@
+name: 刷新指南数据
+
+# 每周一 00:00 UTC 自动跑；也可在 Actions 页手动触发
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 装依赖（B站爬虫）
+        run: pip install curl_cffi
+
+      # 官方源必成（公开 JSON）；B站尽力而为（CI 机房 IP 可能触发风控，
+      # 失败已在 run.py 内部捕获不影响出稿）；crawl4ai/小红书在 CI 自动跳过。
+      # 梯度以仓库里的 data/tier_current.json 为准（人工核对，换赛季需手动更新）。
+      - name: 采集 + 分析 + 生成指南
+        run: python run.py
+
+      - name: 提交刷新后的指南
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guide/ data/tier_current.json
+          if git diff --cached --quiet; then
+            echo "指南无变化，跳过提交"
+          else
+            git commit -m "chore: 自动刷新指南数据 ($(date +%F))"
+            git push
+          fi
