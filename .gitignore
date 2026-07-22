@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# 原始抓取缓存 / 中间产物（可重新生成，且避免再分发第三方内容）
+data/raw/
+data/processed/
+data/xhs_cookies.json
+
+# 保留：data/tier_current.json（精选梯度）、guide/（成品指南）

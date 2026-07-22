@@ -1,0 +1,16 @@
+# 官方数据(pvp.qq.com) + 基础分析：标准库即可，无需安装
+# ↓ 社区源按需安装
+
+# B站爬虫（模拟真实 Chrome 指纹，绕 403）—— 已验证可用
+curl_cffi>=0.7
+
+# 攻略站梯度榜（转 LLM-ready markdown，渲染 JS）
+# pip install crawl4ai 后需再跑:  crawl4ai-setup
+crawl4ai>=0.4
+
+# 小红书笔记（Playwright 持久登录态，确定性抓取，无需 API key）
+# crawl4ai 已自带 playwright+chromium；单独装则:  pip install playwright && playwright install chromium
+playwright>=1.40
+
+# 可选：隐形爬虫，配合小红书绕反爬
+# scrapling>=0.2
