@@ -4,6 +4,7 @@
 
 **爬取国内多平台数据，自动分析英雄 / 装备强度，生成 2 · 3 · 5 人阵容搭配指南**
 
+[![刷新指南](https://github.com/ydna564/wangzhe-guide/actions/workflows/refresh.yml/badge.svg)](https://github.com/ydna564/wangzhe-guide/actions/workflows/refresh.yml)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
 ![Season](https://img.shields.io/badge/版本-S44-e63946)
 ![Data](https://img.shields.io/badge/数据-近3个月内-2a9d8f)
